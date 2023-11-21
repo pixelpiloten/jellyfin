@@ -1,0 +1,19 @@
+version: "3.5"
+
+services:
+  # Jellyfin
+  jellyfin:
+    image: jellyfin
+    container_name: jellyfin
+    volumes:
+      - ./data/config:/config
+      - ./data/cache:/cache
+      - ./data/media:/media
+    ports:
+      - "8097:8096"
+      - "8921:8920"
+    build:
+      context: ./
+      dockerfile: ./.docker/Dockerfile
+    env_file:
+      - "./.env"
