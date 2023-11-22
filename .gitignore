@@ -1,3 +1,5 @@
 data/config
 data/cache
 data/media
+.helm/jellyfin/templates/pv--media--video.yaml
+.helm/jellyfin/templates/pvc--media--video.yaml
