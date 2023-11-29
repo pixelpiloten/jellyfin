@@ -11,7 +11,7 @@
 ## Instructions - Helm chart
 
 
-1. Go to the `.helm/jellyfin` directory and rename the `values.example.yaml` to `values.yaml` and define your volumes, this is based on the StorageClass `local-storage`. Config and Cache volume are mandatory so leave those in.
+1. Go to the `.helm/jellyfin` directory and rename the `values.example.yaml` to `values.yaml` and define your volumes, this is based on the StorageClass `local-path`. Config and Cache volume are mandatory so leave those in.
 
 2. Deploy the helm chart.
 
