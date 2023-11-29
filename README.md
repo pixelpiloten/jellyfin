@@ -10,6 +10,9 @@
 
 ## Kubernetes helm setup for Jellyfin
 
-2. Go to the `.helm/jellyfin` directory and deploy the helm chart.
 
-    ```helm -n production upgrade -i jellyfin . -f values.yaml```
+1. Go to the `.helm/jellyfin` directory and rename the `values.example.yaml` to `values.yaml` and define your volumes, this is based on the StorageClass `local-storage`. Config and Cache volume are mandatory so leave those in.
+
+2. Deploy the helm chart.
+
+    ```helm -n <YOUR-NAMESPACE> upgrade -i jellyfin . -f values.yaml```
