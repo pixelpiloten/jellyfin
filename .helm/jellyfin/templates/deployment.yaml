@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: jellyfin
-  namespace: production
+  namespace: {{ $.Values.namespace }}
   labels:
     app: jellyfin
 spec:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: jellyfin
-        image: {{ .Values.dockerImage }}
+        image: {{ $.Values.dockerImage }}
         ports:
           - name: http
             containerPort: 8096
