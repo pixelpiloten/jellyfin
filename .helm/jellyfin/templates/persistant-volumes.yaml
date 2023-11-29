@@ -1,8 +1,9 @@
+{{- range $i, $volume := .Values.volumes }}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: jellyfin-config
-  namespace: production
+  name: {{ $volume.name }}
+  namespace: {{ $.namespace }}
 spec:
   capacity:
     storage: 1Gi
@@ -11,7 +12,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: /pixelpiloten/k3s/jellyfin/data/config
+    path: {{ $volume.localNodePath }}
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -19,4 +20,6 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          - dreadnaught
+          - {{ $volume.nodeSelectorHostName}}
+---
+{{- end }}

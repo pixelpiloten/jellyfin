@@ -1,0 +1,22 @@
+dockerImage: jellyfin/jellyfin:10.8.12
+namespace: production
+
+volumes:
+  config:
+    name: jellyfin-config
+    nodeSelectorHostName: dreadnaught
+    localNodePath: /pixelpiloten/k3s/jellyfin/data/config
+    containerPath: /config
+    storageCapacity: 1Gi
+  cache:
+    name: jellyfin-cache
+    nodeSelectorHostName: dreadnaught
+    localNodePath: /pixelpiloten/k3s/jellyfin/data/cache
+    containerPath: /cache
+    storageCapacity: 1Gi
+  mediaVideo:
+    name: jellyfin-media-video
+    nodeSelectorHostName: dreadnaught
+    localNodePath: /pixelpiloten/Dump/video
+    containerPath: /media/video
+    storageCapacity: 1500Gi

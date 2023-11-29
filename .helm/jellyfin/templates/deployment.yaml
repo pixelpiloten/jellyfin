@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: jellyfin
-  namespace: production
+  namespace: {{ .Values.namespace }}
   labels:
     app: jellyfin
 spec:
@@ -17,25 +17,19 @@ spec:
     spec:
       containers:
       - name: jellyfin
-        image: jellyfin/jellyfin:10.8.12
+        image: {{ .Values.dockerImage }}
         ports:
           - name: http
             containerPort: 8096
             protocol: TCP
         volumeMounts:
-          - name: jellyfin-config
-            mountPath: /config
-          - name: jellyfin-cache
-            mountPath: /cache
-          - name: jellyfin-media-video
-            mountPath: /media/video
+        {{- range $i, $volume := .Values.volumes }}
+          - name: {{ $volume.name }}
+            mountPath: {{ $volume.containerPath }}
+        {{- end }}
       volumes:
-        - name: jellyfin-config
+      {{- range $i, $volume := .Values.volumes }}
+        - name: {{ $volume.name }}
           persistentVolumeClaim:
-            claimName: jellyfin-config
-        - name: jellyfin-cache
-          persistentVolumeClaim:
-            claimName: jellyfin-cache
-        - name: jellyfin-media-video
-          persistentVolumeClaim:
-            claimName: jellyfin-media-video
+            claimName: {{ $volume.name }}
+      {{- end }}

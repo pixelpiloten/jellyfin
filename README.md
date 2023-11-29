@@ -10,4 +10,6 @@
 
 ## Kubernetes helm setup for Jellyfin
 
-@TODO Add documentation for kubernetes helm chart deployment with local storage as storageclass.
+2. Go to the `.helm/jellyfin` directory and deploy the helm chart.
+
+    ```helm -n production upgrade -i jellyfin . -f values.yaml```

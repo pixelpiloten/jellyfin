@@ -1,0 +1,15 @@
+{{- range $i, $volume := .Values.volumes }}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ $volume.name}}
+  namespace: {{ $.namespace }}
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: local-storage
+  resources:
+    requests:
+      storage: {{ $volume.storageCapacity }}
+---
+{{- end }}
