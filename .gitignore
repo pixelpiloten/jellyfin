@@ -1,4 +1,1 @@
-data/config
-data/cache
-data/media
 .helm/jellyfin/values.yaml

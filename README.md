@@ -2,7 +2,7 @@
 
 ## Instructions - Local docker
 
-1. Create the media folder and add movies/tv-shows/music to it.
+1. Add content (Movies/TV-Shows, Music etc.) to the `data/media` folder.
 2. Start the container.
 
     ```docker-compose up --build --force-recreate```
