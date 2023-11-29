@@ -1,18 +1,18 @@
-{{- range $i, $volume := .Values.volumes }}
+{{- range $.Values.volumes }}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: {{ $volume.name }}
-  namespace: {{ $.namespace }}
+  name: {{ .name }}
+  namespace: production
 spec:
   capacity:
-    storage: 1Gi
+    storage: {{ .storageCapacity }}
   accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: local-storage
+  storageClassName: local-path
   local:
-    path: {{ $volume.localNodePath }}
+    path: {{ .localNodePath }}
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -20,6 +20,6 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          - {{ $volume.nodeSelectorHostName}}
+          - {{ .nodeSelectorHostName }}
 ---
 {{- end }}

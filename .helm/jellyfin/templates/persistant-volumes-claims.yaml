@@ -1,15 +1,15 @@
-{{- range $i, $volume := .Values.volumes }}
-kind: PersistentVolumeClaim
+{{- range $.Values.volumes }}
 apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
-  name: {{ $volume.name}}
-  namespace: {{ $.namespace }}
+  name: {{ .name }}
+  namespace: production
 spec:
   accessModes:
   - ReadWriteOnce
-  storageClassName: local-storage
+  storageClassName: local-path
   resources:
     requests:
-      storage: {{ $volume.storageCapacity }}
+      storage: {{ .storageCapacity }}
 ---
 {{- end }}

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: jellyfin
-  namespace: {{ .Values.namespace }}
+  namespace: production
   labels:
     app: jellyfin
 spec:
@@ -23,13 +23,13 @@ spec:
             containerPort: 8096
             protocol: TCP
         volumeMounts:
-        {{- range $i, $volume := .Values.volumes }}
-          - name: {{ $volume.name }}
-            mountPath: {{ $volume.containerPath }}
+        {{- range $.Values.volumes }}
+          - name: {{ .name }}
+            mountPath: {{ .containerPath }}
         {{- end }}
       volumes:
-      {{- range $i, $volume := .Values.volumes }}
-        - name: {{ $volume.name }}
+      {{- range $.Values.volumes }}
+        - name: {{ .name }}
           persistentVolumeClaim:
-            claimName: {{ $volume.name }}
+            claimName: {{ .name }}
       {{- end }}
